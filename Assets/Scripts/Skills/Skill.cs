@@ -5,17 +5,18 @@ using UnityEngine;
 
 public abstract class Skill : MonoBehaviour
 {
-    [SerializeField] private float deActiveTime = 1.5f;
+    [SerializeField] private float skillCoolDown = 1.5f;
     [SerializeField] private float activeTime = 3f;
 
     [SerializeField] private float remainingDuration;
     [SerializeField] private bool isActive = true;
 
-    public bool IsActive => isActive;
-    public float RemainingDuration => remainingDuration;
-    public float DeactivateTime => deActiveTime;
-    public float ActivateTime => activeTime;
-    protected void Start()
+    public float SkillCoolDown { get => skillCoolDown; set => skillCoolDown = value; }
+    public float ActiveTime { get => activeTime; set => activeTime = value; }
+    public float RemainingDuration { get => remainingDuration; }
+    public bool IsActive { get => isActive; set => isActive = value; }
+
+    protected virtual void Start()
     {
         Activate();
     }
@@ -44,13 +45,13 @@ public abstract class Skill : MonoBehaviour
 
     public virtual void Activate()
     {
-        isActive = true;
         remainingDuration = activeTime;
+        isActive = true;
     }
     public virtual void DeActivate()
     {
+        remainingDuration = skillCoolDown;
         isActive = false;
-        remainingDuration = deActiveTime;
     }
 
     public abstract void UpgradeSkill();

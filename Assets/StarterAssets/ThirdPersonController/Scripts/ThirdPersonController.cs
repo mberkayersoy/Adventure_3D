@@ -1,4 +1,4 @@
-﻿ using UnityEngine;
+﻿     using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -211,10 +211,12 @@ namespace StarterAssets
 
                 // round speed to 3 decimal places
                 _speed = Mathf.Round(_speed * 1000f) / 1000f;
+                Debug.Log("if");
             }
             else
             {
                 _speed = targetSpeed;
+                Debug.Log("else");
             }
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);

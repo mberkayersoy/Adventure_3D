@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LightningInteraction : MonoBehaviour
 {
     [SerializeField] private LightningController lightningController;
-    private Vector3 position;
     private int damage;
-    private float radius;
     private SphereCollider sphereCollider;
 
     private void Awake()

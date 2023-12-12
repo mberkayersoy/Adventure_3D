@@ -4,24 +4,15 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int health;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private HealthSO _playerHealthSO;
+    [SerializeField] private int _currentHealth;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        _currentHealth = _playerHealthSO.maxHealth;
     }
-
-    private void OnCollisionEnter(Collision collision)
+    public void TakeDamage(int takenDamage)
     {
-        if (collision.gameObject.TryGetComponent(out IDamageable enemy)) 
-        {
-            health -= 5;
-        }
+        _currentHealth -= takenDamage;
     }
 }

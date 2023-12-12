@@ -6,27 +6,26 @@ using DG.Tweening;
 public class GuardianController : Skill
 {
     [SerializeField] private GuardianInteraction guardianPartPrefab;
-    [SerializeField] private float rotationSpeed = 1f;
+    [SerializeField] private const float rotationSpeed = 1f;
     [SerializeField] private int damage;
     [SerializeField] private int guardianCount;
 
     [SerializeField] private float orbitRadius;
 
+    private readonly float animationDuration = 1f;
     private float angleBetweenGuardians;
 
     private new void Start()
     {
-        RotateObject();
+        RotateObject(transform);
         GenerateGuardianParts();
+        base.Start();
     }
 
-
     // Rotate Guardian constantly
-    void RotateObject(Transform rotateTransform = null)
+    void RotateObject(Transform rotatingTransform)
     {
-        rotateTransform = rotateTransform != null ? rotateTransform : transform;
-
-        rotateTransform.DORotate(new Vector3(0f, 360f, 0f), rotationSpeed, RotateMode.FastBeyond360)
+        rotatingTransform.DORotate(new Vector3(0f, 360f, 0f), rotationSpeed, RotateMode.FastBeyond360)
             .SetLoops(-1)
             .SetEase(Ease.Linear);
     }
@@ -59,28 +58,28 @@ public class GuardianController : Skill
             Vector3 guardianPosition = CalculateOrbitPosition(angle);
             guardianPart.transform.position = guardianPosition;
 
-            guardianPart.transform.DORotate(new Vector3(0f, 360f, 0f), rotationSpeed, RotateMode.FastBeyond360)
-                .SetLoops(-1)
-                .SetEase(Ease.Linear);
+            RotateObject(guardianPart.transform);
         }
     }
 
     public override void Activate()
     {
         base.Activate();
+
+        Debug.Log("GuardianController Activate");
         foreach (Transform child in transform)
         {
             if (child == transform) continue;
             child.gameObject.SetActive(true);
-        }        
+        }
 
-        transform.DOScale(Vector3.one, 1f);
+        transform.DOScale(Vector3.one, animationDuration);
     }
     public override void DeActivate()
     {
         base.DeActivate();
-
-        transform.DOScale(Vector3.zero, 1f).OnComplete(() =>
+        Debug.Log("GuardianController DeActivate");
+        transform.DOScale(Vector3.zero, animationDuration).OnComplete(() =>
         {
             foreach (Transform child in transform)
             {

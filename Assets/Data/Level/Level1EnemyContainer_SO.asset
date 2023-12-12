@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff9fa71542fde546a04ec55deccd131, type: 3}
+  m_Name: Level1EnemyContainer_SO
+  m_EditorClassIdentifier: 
+  m_Description: This is the level 1 enemy datas.
+  standartEnemies:
+  - poolableObject: {fileID: 3571028025704510288, guid: 28026c8d71d84f342b8394a896e07cdd,
+      type: 3}
+    chanceRate: 0.8
+  - poolableObject: {fileID: 3571028025704510288, guid: 2644072bf6add704caa8dabda9790696,
+      type: 3}
+    chanceRate: 0.2
+  eliteEnemies: []
+  bossEnemies: []

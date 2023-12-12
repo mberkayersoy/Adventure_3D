@@ -15,7 +15,6 @@ public class AnimationManager : MonoBehaviour
     private int animIDGrounded;
     private int animIDFreeFall;
     private int animIDMotionSpeed;
-    private int animIDFrontFlip;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -30,14 +29,7 @@ public class AnimationManager : MonoBehaviour
         playerMovement.OnGroundStateChangeAction += PlayerMovement_OnGroundStateChangeAction;
         playerMovement.OnJumpAction += PlayerMovement_OnJumpAction;
         playerMovement.OnFreeFallAction += PlayerMovement_OnFreeFallAction;
-        playerMovement.OnFrontFlipAction += PlayerMovement_OnFrontFlipAction;
     }
-
-    private void PlayerMovement_OnFrontFlipAction(bool isFrontFlip)
-    {
-        animator.SetBool(animIDFrontFlip, isFrontFlip);
-    }
-
     private void PlayerMovement_OnFreeFallAction(bool isFreeFall)
     {
         animator.SetBool(animIDFreeFall, isFreeFall);
@@ -69,7 +61,6 @@ public class AnimationManager : MonoBehaviour
         animIDGrounded = Animator.StringToHash("Grounded");
         animIDFreeFall = Animator.StringToHash("FreeFall");
         animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
-        animIDFrontFlip = Animator.StringToHash("FrontFlip");
 
     }
 

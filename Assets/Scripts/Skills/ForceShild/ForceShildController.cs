@@ -12,6 +12,7 @@ public class ForceShildController : Skill
     {
         transform.localScale = new Vector3(radius, radius, radius);
         collider = GetComponent<SphereCollider>();
+        base.Start();
     }
     private void OnTriggerStay(Collider other)
     {
