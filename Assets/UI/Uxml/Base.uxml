@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Uss/GameUss.uss?fileID=7433441132597879392&amp;guid=3c670ecb5ad811642877c98e5f6ced2e&amp;type=3#GameUss" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:Button text="Play" display-tooltip-when-elided="true" class="button-color" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98c9258bf8a44740998a2fe333d5625, type: 3}
+  m_Name: Level1PickUpContainer_SO
+  m_EditorClassIdentifier: 
+  m_Description: This is the level 1 experience datas.
+  pickUpObjects:
+  - poolableObject: {fileID: 7676200500302283523, guid: 34f7ade7a68d54548a723419a20dac2d,
+      type: 3}
+    chanceRate: 0.8
+  - poolableObject: {fileID: 4293198614933271205, guid: d2908addcad8313448dee5a95f78d384,
+      type: 3}
+    chanceRate: 0.5
+  - poolableObject: {fileID: 8903843920403538678, guid: cbe8f6777d4ef1543b5c633538dab964,
+      type: 3}
+    chanceRate: 0.2
+  - poolableObject: {fileID: 4610999878986991438, guid: 7555c0f71a607ca4596675afd650d126,
+      type: 3}
+    chanceRate: 0.4
+  - poolableObject: {fileID: 7380964141117449760, guid: f06255414915b7341880785faf1961b0,
+      type: 3}
+    chanceRate: 0.05
+  - poolableObject: {fileID: 287992209977995657, guid: 10dfd66fbfc84f245871aba8c77a7123,
+      type: 3}
+    chanceRate: 0.05

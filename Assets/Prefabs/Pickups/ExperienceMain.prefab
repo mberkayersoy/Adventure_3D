@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f53f338f0ccd38746ab6a2c638fa29cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _magnetPickedUp: {fileID: 11400000, guid: 41729fc320dc7a842a9da4fa79493b33, type: 2}
 --- !u!114 &5611205537735240909
 MonoBehaviour:
   m_ObjectHideFlags: 0

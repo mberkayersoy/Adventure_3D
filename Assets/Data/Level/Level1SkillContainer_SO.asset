@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb0d6171b44a0c7488df071d3f6a3a9a, type: 3}
+  m_Name: Level1SkillContainer_SO
+  m_EditorClassIdentifier: 
+  m_Description: 
+  activeSkillList:
+  - {fileID: 3402321849784301808, guid: 91f5da7a61dd97e40ad855b231d77bc3, type: 3}
+  - {fileID: 7322334033245508707, guid: f06e530cf87db8142b4a551b4930c2f8, type: 3}
+  - {fileID: 6477057748141996570, guid: 89b8d82b5706d684498e1e1ba1ef9dc4, type: 3}
+  - {fileID: 2644886619727292909, guid: 6181151cea2fe114dbc29a40518181b5, type: 3}
+  passiveSkillList:
+  - {fileID: 5829999933756325555, guid: aa67ad859e8cfe945a528144bde2a25c, type: 3}

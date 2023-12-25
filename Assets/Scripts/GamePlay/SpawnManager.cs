@@ -8,7 +8,7 @@ using Lean.Pool;
 public class SpawnManager : MonoBehaviour
 {
     [Tooltip("Get player transform reference to spawn enemies around the player.")]
-    [SerializeField] private GameObjectRuntimeSetSO playerRunTimeSet;
+    [SerializeField] private GameObjectRuntimeSetSO _playerRunTimeSet;
 
     [Header("Broadcast on Event Channels")]
 
@@ -17,10 +17,11 @@ public class SpawnManager : MonoBehaviour
 
     [Header("Level Spawn Objects")]
     [SerializeField] private EnemyContainerSO _enemyContainer;
-    [SerializeField] private ExperienceContainerSO _experienceContainer;
+    [SerializeField] private PickUpContainerSO _pickUpContainer;
 
     [Header("Spawn Manager Settings")]
-    [SerializeField] private float _outerSpawnRadius = 6f;
+    [SerializeField] private float _outerSpawnRadius = 8f;
+    [SerializeField] private float _innerSpawnRadius = 5f;
     [SerializeField] private float _spawnInterval = 0.1f;
     [SerializeField] private bool _shouldSpawn;
 
@@ -30,7 +31,7 @@ public class SpawnManager : MonoBehaviour
     private void Awake()
     {
         // Get Player Transform referance to spawn enemies around the player.
-        _playerTransform = playerRunTimeSet.Items[0].transform;
+        _playerTransform = _playerRunTimeSet.Items[0].transform;
     }
 
     private void OnEnable()
@@ -45,10 +46,9 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnExperience(Vector3 deadEnemyPosition)
     {
-        SelectRandomObject(_experienceContainer.experienceObjects);
-        LeanPool.Spawn(SelectRandomObject(_experienceContainer.experienceObjects), deadEnemyPosition + Vector3.up, Quaternion.identity);
+        SelectRandomObject(_pickUpContainer.pickUpObjects);
+        LeanPool.Spawn(SelectRandomObject(_pickUpContainer.pickUpObjects), deadEnemyPosition + Vector3.up, Quaternion.identity);
     }
-
 
     private void Update()
     {
@@ -64,7 +64,7 @@ public class SpawnManager : MonoBehaviour
             {
                 float randomAngle = Random.Range(0f, 360f);
 
-                float randomDistance = _outerSpawnRadius + Random.Range(0f, 1f);
+                float randomDistance = _innerSpawnRadius + Random.Range(0f, _outerSpawnRadius - _innerSpawnRadius);
                 Vector2 randomCirclePoint = Quaternion.Euler(0f, 0f, randomAngle) * Vector2.up * randomDistance;
                 Vector3 spawnPosition = _playerTransform.position + new Vector3(randomCirclePoint.x, 0f, randomCirclePoint.y);
 
@@ -106,7 +106,8 @@ public class SpawnManager : MonoBehaviour
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(_playerTransform.position, _outerSpawnRadius);
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(_playerTransform.position, _innerSpawnRadius);
         }
     }
-
 }
