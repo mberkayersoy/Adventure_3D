@@ -404,6 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultEnemySO: {fileID: 11400000, guid: e169cc828ebacb8469309c83edbb3caf, type: 2}
   playerSet: {fileID: 11400000, guid: 5f28c92ba1d6a2449af6d339a88f7b4d, type: 2}
+  _maxDistanceToPlayer: 20
 --- !u!54 &2272573345834251480
 Rigidbody:
   m_ObjectHideFlags: 0

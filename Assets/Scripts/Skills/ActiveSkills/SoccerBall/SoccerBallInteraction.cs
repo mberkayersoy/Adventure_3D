@@ -7,9 +7,7 @@ public class SoccerBallInteraction : MonoBehaviour
     [SerializeField] private SoccerBallController _controller;
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
-    [SerializeField] private int _bounceCount;
     [SerializeField] private float _ballLifeTime;
-    private float _remainingTime;
     private Rigidbody _rb;
 
     private void Awake()
@@ -19,29 +17,15 @@ public class SoccerBallInteraction : MonoBehaviour
         transform.SetParent(null, true);
     }
 
-    private void Update()
-    {
-        if (_remainingTime >= 0)
-        {
-            _remainingTime -= Time.deltaTime;
-
-            if (_remainingTime <= 0)
-            {
-                gameObject.SetActive(false);
-            }
-        }
-    }
     private void OnEnable()
     {
         _controller.OnActivateAction += Controller_OnActivateAction;
     }
 
-    private void Controller_OnActivateAction(float speed, int damage, int bounceCount)
+    private void Controller_OnActivateAction(float speed, int damage)
     {
-        this._speed = speed;
-        this._damage = damage;
-        this._bounceCount = bounceCount;
-        _remainingTime = _ballLifeTime;
+        _speed = speed;
+        _damage = damage;
         ThrowTheBall();
     }
 
@@ -61,17 +45,11 @@ public class SoccerBallInteraction : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        _bounceCount--;
         if (collision.gameObject.TryGetComponent(out IDamageable enemy))
         {
             enemy.TakeDamage(_damage);
-            Debug.Log(collision.gameObject.name);
-            Vector3 reflectionVector = Vector3.Reflect(_rb.velocity, Vector3.up);
-            _rb.AddForce(reflectionVector.normalized * _rb.velocity.magnitude, ForceMode.Impulse);
-        }
-        if (_bounceCount <= 0)
-        {
-            gameObject.SetActive(false);
-        }
+            //Vector3 reflectionVector = Vector3.Reflect(_rb.velocity, Vector3.up);
+            //_rb.AddForce(reflectionVector.normalized * _rb.velocity.magnitude, ForceMode.Impulse);
+        }   
     }
 }

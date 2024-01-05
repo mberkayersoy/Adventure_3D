@@ -14,9 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Description: 
   activeSkillList:
-  - {fileID: 3402321849784301808, guid: 91f5da7a61dd97e40ad855b231d77bc3, type: 3}
-  - {fileID: 7322334033245508707, guid: f06e530cf87db8142b4a551b4930c2f8, type: 3}
-  - {fileID: 6477057748141996570, guid: 89b8d82b5706d684498e1e1ba1ef9dc4, type: 3}
-  - {fileID: 2644886619727292909, guid: 6181151cea2fe114dbc29a40518181b5, type: 3}
+  - {fileID: 11400000, guid: 48604b3d49d6b264c841c2c7d2af5fef, type: 2}
+  - {fileID: 11400000, guid: 40384cf15899e2a419343843da87142e, type: 2}
+  - {fileID: 11400000, guid: a26c65f14587c9e4f97238d890138096, type: 2}
+  - {fileID: 11400000, guid: e6ebbc0df97871a40bbe8585330d6e39, type: 2}
+  - {fileID: 11400000, guid: 54e610a6b54de684a9a47dea54c2657d, type: 2}
+  - {fileID: 11400000, guid: e03f3988dc4c22d4f94d8b66e6174231, type: 2}
+  - {fileID: 11400000, guid: 350a3ac84dd833248b49146255becad4, type: 2}
   passiveSkillList:
-  - {fileID: 5829999933756325555, guid: aa67ad859e8cfe945a528144bde2a25c, type: 3}
+  - {fileID: 11400000, guid: bb602014eb69c3a4ba787a2c1923115c, type: 2}
+  - {fileID: 11400000, guid: 59ebefaff6dbee642b51f46543fddae1, type: 2}
+  - {fileID: 11400000, guid: a96f488c1e9050c469a7d36173e13111, type: 2}

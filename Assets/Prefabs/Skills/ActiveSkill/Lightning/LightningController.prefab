@@ -313,20 +313,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27fffdb736005249a6eb949ddee34aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillLevel: 0
-  uiInfos:
-  - Lightning shower on random target area
-  - Adds damage +1 bolt
-  - Adds damage +1 bolt
-  - Adds damage +1 bolt
-  - Adds damage +1 bolt
-  - Thundering destruction.
   skillCoolDown: 1
   activeTime: 0.25
   remainingDuration: 0
   isActive: 1
-  damage: 1000
-  lightningRadius: 1
+  _damage: 1000
+  _lightningRadius: 2
   attackPoint: {fileID: 2553241508683358088}
   lightingInteractionParent: {fileID: 71839373884661852}
 --- !u!1001 &4307844918520074554

@@ -154,7 +154,7 @@ PrefabInstance:
     - target: {fileID: 5611205537735240909, guid: 25fb3170ee662214bbf8b4f2e6878d20,
         type: 3}
       propertyPath: _experienceAmount
-      value: 100
+      value: 1100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

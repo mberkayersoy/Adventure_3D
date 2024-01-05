@@ -4,40 +4,60 @@ using UnityEngine;
 
 public class DrillInteraction : MonoBehaviour
 {
-    [SerializeField] private int speed;
-    [SerializeField] private int damage;
+    [SerializeField] private DrillShotController _controller;
+    [SerializeField] private float _speed;
+    [SerializeField] private int _damage;
 
     private Rigidbody rb;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        _controller = GetComponentInParent<DrillShotController>();
+        _controller.OnActivateAction += Controller_OnActivateAction;
     }
-    private void Start()
+
+    private void OnEnable()
     {
-        rb.AddForce(transform.forward * speed, ForceMode.Impulse);
+
     }
+    private void FixedUpdate()
+    {
+        rb.velocity = _speed * Time.fixedDeltaTime * transform.forward;
+    }
+
+    //private void OnDisable()
+    //{
+    //    _controller.OnActivateAction -= Controller_OnActivateAction;
+    //}
+
+    private void Controller_OnActivateAction(float speed, int damage)
+    {
+        _speed = speed;
+        _damage = damage;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out IDamageable enemy))
+        Vector3 collisionNormal = collision.contacts[0].normal;
+        Vector3 reflectedVector = Vector3.Reflect(transform.forward, collisionNormal);
+
+        Quaternion lookRotation = Quaternion.LookRotation(reflectedVector, Vector3.up);
+        lookRotation.x = 0;
+        lookRotation.z = 0;
+
+        transform.rotation = lookRotation;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out IDamageable enemy))
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(_damage);
         }
-        else
-        {
-            // Çarpýþan yüzeyin normal vektörü
-            Vector3 collisionNormal = collision.contacts[0].normal;
-            Vector3 direction = rb.velocity.normalized;
-
-            Vector3 reflectedVector = Vector3.Reflect(direction, collisionNormal).normalized;
-
-            rb.AddForce(reflectedVector * rb.velocity.magnitude, ForceMode.Force);
-            //rb.velocity = reflectedVector * rb.velocity.magnitude;
-
-            // Yeni rotasyon
-            Quaternion lookRotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
-            lookRotation.x = 0;
-            lookRotation.z = 0;
-            transform.rotation = lookRotation;
-        }
+    }
+    private void OnDestroy()
+    {
+        _controller.OnActivateAction -= Controller_OnActivateAction;
     }
 }

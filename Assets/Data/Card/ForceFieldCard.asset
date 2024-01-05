@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208d10bf5d2e141499c3101dfdee8688, type: 3}
+  m_Name: ForceFieldCard
+  m_EditorClassIdentifier: 
+  cardSkill: {fileID: 3402321849784301808, guid: 91f5da7a61dd97e40ad855b231d77bc3,
+    type: 3}
+  cardName: Force Field
+  cardSprite: {fileID: 21300000, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+  cardBackground: {fileID: 21300000, guid: b7293498b37f79e428cdddbed14f7140, type: 3}
+  cardLevel: 0
+  cardInfos:
+  - Generates a dissolving forcefield
+  - Adds area size and damage
+  - Adds area size Adds damage
+  - Adds area size Adds damage
+  - Adds area size Adds damage
+  - This is my domain

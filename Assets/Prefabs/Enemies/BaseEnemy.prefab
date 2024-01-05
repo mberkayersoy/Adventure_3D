@@ -242,9 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ef3dee388a1d144aa82bbf298810f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
   defaultEnemySO: {fileID: 11400000, guid: e169cc828ebacb8469309c83edbb3caf, type: 2}
   playerSet: {fileID: 11400000, guid: 5f28c92ba1d6a2449af6d339a88f7b4d, type: 2}
+  _maxDistanceToPlayer: 5
 --- !u!54 &2272573345834251480
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -286,9 +286,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealthSO: {fileID: 11400000, guid: f3b80e1c6d9c42f48b2980178f8a070b, type: 2}
   _currentHealth: 0
-  EnemyDeadPosition: {fileID: 11400000, guid: 240a8a49e5d05ed4b9b0e61d8ae60b5d, type: 2}
-  EnemyDead: {fileID: 11400000, guid: b69cf398422d8094c8d05d57bb20bee9, type: 2}
-  placeHolder: 0
+  _enemyDeadPosition: {fileID: 0}
+  _enemyDead: {fileID: 0}
+  _destoryAllEnemies: {fileID: 0}
 --- !u!114 &527700857487126399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,8 +334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4967d211528faed409757429ffe35f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultEnemyDamageSO: {fileID: 11400000, guid: 2c245c9f664cfb74194884eb0db5cbd5,
-    type: 2}
+  _defaultEnemyDamage: {fileID: 0}
+  _enemyAttack: {fileID: 0}
 --- !u!114 &6562365483478149126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b8422654fb12f43822115c217a901b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RunTimeSetSet: {fileID: 11400000, guid: a3b1fcd8264bb0749af1c93f0129ef9f, type: 2}
+  m_RunTimeSet: {fileID: 0}
 --- !u!1 &5516646131194986669
 GameObject:
   m_ObjectHideFlags: 0

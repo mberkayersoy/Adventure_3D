@@ -34,12 +34,19 @@ public class PlayerHealth : MonoBehaviour
     private void Heal(int healPercetange)
     {
         _currentHealth += Mathf.RoundToInt(_playerHealthSO.maxHealth * healPercetange / 100);
+        ClampHealth();
         _playerHealthChanged.OnEventRaised(_currentHealth);
     }
 
     private void TakeDamage(int takenDamage)
     {
         _currentHealth -= takenDamage;
+        ClampHealth();
         _playerHealthChanged.OnEventRaised(_currentHealth);
+    }
+
+    private void ClampHealth()
+    {
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, _playerHealthSO.maxHealth);
     }
 }

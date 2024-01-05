@@ -44,20 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a355a2292421017489da2bcca0c1694f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillLevel: 1
-  uiInfos:
-  - Summons 2 tops that circle you Stops bullets
-  - +1 top Adds spin speed and damage
-  - +1 top Adds spin speed and damage
-  - +1 top Adds spin speed and damage
-  - +1 top Adds spin speed and damage
-  - The Wheel of Death
   skillCoolDown: 1.5
   activeTime: 3
   remainingDuration: 0
   isActive: 1
-  _guardianPartPrefab: {fileID: -5499873693960349016, guid: 6c84dd1b4f957d64980798b9af2f5292,
+  _guardianPartPrefab: {fileID: 2583689912567260030, guid: 34ba58e54ce4d654fa38090f5e8f7ec9,
     type: 3}
-  _damage: 100
-  _guardianCount: 3
-  _orbitRadius: 4
+  _damage: 200
+  _guardianCount: 2

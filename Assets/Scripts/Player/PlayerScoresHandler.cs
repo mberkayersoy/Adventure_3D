@@ -18,6 +18,7 @@ public class PlayerScoresHandler : MonoBehaviour
     [SerializeField] private ExperienceDataEventChannelSO _playerExperienceData;
 
     private ExperienceData _experienceData;
+    private Queue<Action> _levelUpQueue = new Queue<Action>();
     private void OnEnable()
     {
         _experienceGained.OnEventRaised += UpdateExperience;

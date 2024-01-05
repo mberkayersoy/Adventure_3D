@@ -21,11 +21,9 @@ public class Magnet : PassiveSkill
             magnatable.MoveToTarget(transform.position);
         }
     }
-
     public override void UpgradeSkill()
     {
         magnetRange++;
         magnetCollider.radius = magnetRange;
-        base.UpgradeSkill(); 
     }
 }

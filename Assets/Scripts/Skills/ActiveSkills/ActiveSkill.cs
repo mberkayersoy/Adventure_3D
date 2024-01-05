@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveSkill : Skill, ITimer
+public abstract class ActiveSkill : Skill, ITimer
 {
     [SerializeField] private float skillCoolDown = 1.5f;
     [SerializeField] private float activeTime = 3f;
@@ -51,10 +51,5 @@ public class ActiveSkill : Skill, ITimer
     {
         remainingDuration = skillCoolDown;
         isActive = false;
-    }
-
-    public override void UpgradeSkill()
-    {
-        throw new System.NotImplementedException();
     }
 }

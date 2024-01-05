@@ -16,10 +16,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [Header("Listen to Event Channels")]
     [SerializeField] private VoidEventChannelSO _destoryAllEnemies;
 
-    public string Name => throw new System.NotImplementedException();
-
-    public GameObject PoolObject => throw new System.NotImplementedException();
-
     private void OnEnable()
     {
         _currentHealth = enemyHealthSO.maxHealth;

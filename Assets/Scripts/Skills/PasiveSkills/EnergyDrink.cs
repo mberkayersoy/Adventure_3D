@@ -7,8 +7,8 @@ using UnityEngine;
 public class EnergyDrink : PassiveSkill, ITimer
 {
     [SerializeField] private int _healPercentage;
-    private float _cooldown = 5f;
-    private float _remainingDuration;
+    [SerializeField] private float _cooldown = 5f;
+    [SerializeField] private float _remainingDuration;
 
     [Header("Broadcast on Event Channels")]
     [SerializeField] private IntEventChannelSO _playerGainHealth;
@@ -38,6 +38,7 @@ public class EnergyDrink : PassiveSkill, ITimer
 
     private void HealPlayer()
     {
+        Debug.Log("HealPlayer");
         _playerGainHealth.RaiseEvent(_healPercentage);
     }
 
@@ -49,5 +50,10 @@ public class EnergyDrink : PassiveSkill, ITimer
     public void DeActivate()
     {
         throw new NotImplementedException();
+    }
+
+    public override void UpgradeSkill()
+    {
+        _healPercentage++;
     }
 }

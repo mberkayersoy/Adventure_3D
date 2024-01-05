@@ -26,8 +26,6 @@ public class UIPlayerHealthDisplay : MonoBehaviour
     private void UpdateHealthDisplay(int currentHealth)
     {
         float targetFillAmount = (float)currentHealth / _playerHealth.maxHealth;
-
-        Debug.Log("TargetFill: " + targetFillAmount);
         _fillImage.fillAmount = targetFillAmount;
     }
 

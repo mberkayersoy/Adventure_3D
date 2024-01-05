@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208d10bf5d2e141499c3101dfdee8688, type: 3}
+  m_Name: LightningCard
+  m_EditorClassIdentifier: 
+  cardSkill: {fileID: 6477057748141996570, guid: 89b8d82b5706d684498e1e1ba1ef9dc4,
+    type: 3}
+  cardName: Lightning
+  cardSprite: {fileID: 21300056, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+  cardBackground: {fileID: 21300000, guid: b7293498b37f79e428cdddbed14f7140, type: 3}
+  cardLevel: 0
+  cardInfos:
+  - Lightning shower on random target area
+  - Adds damage +1 bolt
+  - Adds damage +1 bolt
+  - Adds damage +1 bolt
+  - Adds damage +1 bolt
+  - Thundering destruction.

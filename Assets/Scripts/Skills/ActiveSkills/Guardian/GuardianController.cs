@@ -2,96 +2,101 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class GuardianController : ActiveSkill
 {
     [SerializeField] private GuardianInteraction _guardianPartPrefab;
     [SerializeField] private int _damage;
-    [SerializeField] private int _guardianCount;
+    [SerializeField] private int _guardianCount = 2;
 
-    [SerializeField] private float _orbitRadius;
+    private readonly float _scaleAnimationDuration = 1f;
+    private float _rotationSpeedDuration = 1f;
 
-    private readonly float _animationDuration = 1f;
-    private const float _rotationSpeed = 1f;
-    private float _angleBetweenGuardians;
+    private const float _orbitRadius = 3f;
 
+    private Tween _rotationTween;
+    private Tween _scaleTween;
     private new void Start()
     {
-        RotateObject(transform);
         GenerateGuardianParts();
+        RotateObject();
         base.Start();
     }
 
     // Rotate Guardian constantly
-    void RotateObject(Transform rotatingTransform)
+    private void RotateObject( )
     {
-        rotatingTransform.DORotate(new Vector3(0f, 360f, 0f), _rotationSpeed, RotateMode.FastBeyond360)
+        _rotationTween = transform.DORotate(new Vector3(0f, 360f, 0f), _rotationSpeedDuration, RotateMode.LocalAxisAdd)
             .SetLoops(-1)
             .SetEase(Ease.Linear);
     }
 
-    // Calculate orbit position based on angle and orbit radius
-    Vector3 CalculateOrbitPosition(float angle)
+    private Vector3 CalculateOrbitPosition(float angle)
     {
         Vector3 orbitPosition = Quaternion.Euler(0, angle, 0) * new Vector3(0, 0, _orbitRadius);
         return transform.position + orbitPosition;
     }
-    private void UpgradeGuardianPower(int guardianCount, int damage, float orbitRadius)
-    {
-        this._guardianCount = guardianCount;
-        this._damage = damage;
-        this._orbitRadius = orbitRadius;
-
-        GenerateGuardianParts();
-    }
     private void GenerateGuardianParts()
     {
-        _angleBetweenGuardians = 360f / _guardianCount;
+        float _angleBetweenGuardians = 360f / _guardianCount;
 
         for (int i = 0; i < _guardianCount; i++)
         {
             float angle = i * _angleBetweenGuardians;
-            GuardianInteraction guardianPart = Instantiate(_guardianPartPrefab, transform);
-            guardianPart.SetDamage(_damage);
 
             // Calculate the position based on the angle and orbit radius
             Vector3 guardianPosition = CalculateOrbitPosition(angle);
-            guardianPart.transform.position = guardianPosition;
 
-            RotateObject(guardianPart.transform);
+            GuardianInteraction guardianPart = Instantiate(_guardianPartPrefab, transform);//, guardianPosition, Quaternion.identity, transform);
+            guardianPart.SetDamage(_damage);
+            guardianPart.gameObject.transform.position = guardianPosition;
         }
     }
 
     public override void Activate()
     {
         base.Activate();
-
-        Debug.Log("GuardianController Activate");
+        
         foreach (Transform child in transform)
         {
-            if (child == transform) continue;
-            child.gameObject.SetActive(true);
+            if (child != transform && child != null) child.gameObject.SetActive(true);
         }
 
-        transform.DOScale(Vector3.one, _animationDuration);
+        _scaleTween = transform.DOScale(Vector3.one, _scaleAnimationDuration);
     }
     public override void DeActivate()
     {
         base.DeActivate();
-        Debug.Log("GuardianController DeActivate");
-        transform.DOScale(Vector3.zero, _animationDuration).OnComplete(() =>
+        _scaleTween = transform.DOScale(Vector3.zero, _scaleAnimationDuration).OnComplete(() =>
         {
             foreach (Transform child in transform)
             {
-                if (child == transform) continue;
-                child.gameObject.SetActive(false);
+                if (child != transform && child != null) child.gameObject.SetActive(false);
             }
         });
     }
 
     public override void UpgradeSkill()
     {
-        //UpgradeGuardianPower();
-    }
+        // To prevent DoScale tween bug.
+        _scaleTween.Kill();
+        transform.localScale = Vector3.one;
 
+        _guardianCount++;
+        _damage *= 2;
+
+        DestroyOldGuardians();
+        GenerateGuardianParts();
+    }
+    private void DestroyOldGuardians()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child != transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
 }

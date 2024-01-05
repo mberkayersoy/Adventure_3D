@@ -6,10 +6,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CardDataSO", menuName = "Card Data")]
 public class CardDataSO : ScriptableObject
 {
+    // UI
     public Skill cardSkill;
-    public Sprite cardSprite;
     public string cardName;
-    public string cardDescription;
-    public string upgradeInfo;
-    public Action cardEvent;
+    public Sprite cardSprite;
+    public Sprite cardBackground;
+    [Range(0, 6)]
+    public int cardLevel;
+    public string[] cardInfos;
+
+    //public void IncreaseSkillLevel()
+    //{
+    //    cardLevel++;
+    //    cardSkill.UpgradeSkill();
+    //}
 }

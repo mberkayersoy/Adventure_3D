@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class LightningController : ActiveSkill
 {
-    [SerializeField] private int damage;
-    [SerializeField] private float lightningRadius;
-    [SerializeField] private const float detectionSize = 5;
-    //[SerializeField] private Transform player;
+    private const float _detectionSize = 5;
+    [SerializeField] private int _damage;
+    [SerializeField] private float _lightningRadius;
 
     [SerializeField] private LightningInteraction attackPoint;
     [SerializeField] private Transform lightingInteractionParent;
@@ -21,12 +20,12 @@ public class LightningController : ActiveSkill
     private void FindEnemy()
     {
         // Calculate half extents for the cube (assuming it's centered at the player position)
-        Vector3 halfExtents = new Vector3(detectionSize, detectionSize / 2f, detectionSize);
+        Vector3 halfExtents = new Vector3(_detectionSize, _detectionSize / 2f, _detectionSize);
 
         Collider[] colliders = new Collider[20];
 
         // Find all colliders within the specified box
-        int colliderCount = Physics.OverlapBoxNonAlloc(transform.position + Vector3.up * detectionSize / 2f, halfExtents, colliders, Quaternion.identity);
+        int colliderCount = Physics.OverlapBoxNonAlloc(transform.position + Vector3.up * _detectionSize / 2f, halfExtents, colliders, Quaternion.identity);
 
         List<Collider> enemyColliders = new List<Collider>();
 
@@ -46,17 +45,17 @@ public class LightningController : ActiveSkill
             Collider randomCollider = enemyColliders[randomIndex];
 
             lightingInteractionParent.gameObject.SetActive(IsActive);
-            OnEnemyAttackAction?.Invoke(randomCollider.transform.position, damage, lightningRadius);
+            OnEnemyAttackAction?.Invoke(randomCollider.transform.position, _damage, _lightningRadius);
         }
     }
     
     private void OnDrawGizmos()
     {
         // Calculate half extents for the cube (assuming it's centered at the player position)
-        Vector3 halfExtents = new Vector3(detectionSize, detectionSize / 2f, detectionSize);
+        Vector3 halfExtents = new Vector3(_detectionSize, _detectionSize / 2f, _detectionSize);
 
         // Draw the wire cube
-        Gizmos.DrawWireCube(transform.position + Vector3.up * detectionSize / 2f, 2 * halfExtents);
+        Gizmos.DrawWireCube(transform.position + Vector3.up * _detectionSize / 2f, 2 * halfExtents);
     }
 
     public override void Activate()
@@ -72,6 +71,7 @@ public class LightningController : ActiveSkill
 
     public override void UpgradeSkill()
     {
-        throw new NotImplementedException();
+        _damage += 100;
+        _lightningRadius++;
     }
 }

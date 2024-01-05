@@ -1,3 +1,4 @@
+using GameSystemsCookbook;
 using StarterAssets;
 using System;
 using UnityEngine;
@@ -5,10 +6,17 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private PlayerConfigSO playerMovementSO;
+    //[SerializeField] private PlayerConfigSO playerMovementSO;
     [SerializeField] private bool _isGrounded;
 
     [Header("Listen to Event Channels")]
+    [SerializeField] private IntEventChannelSO _gainedExperience;
+
+    private float maxSpeed = 5f;
+    private float smoothRotation = 0.1f;
+    private float jumpForce = 50f;
+    private float speedChangeRate = 10f;
+    private float jumpTimeout = 0.5f;
 
     private float _speed;
     private float _targetRotation = 0.0f;
@@ -36,9 +44,14 @@ public class PlayerMovement : MonoBehaviour
     {
         _input = GetComponent<StarterAssetsInputs>();
         _groundCheck.OnIsGroundedChangeAction += GroundCheck_OnIsGroundedChangeAction;
-
+        _gainedExperience.OnEventRaised += IncreaseSpeed;
         // reset our timeouts on start
-        _jumpTimeoutDelta = playerMovementSO.jumpTimeout;
+        _jumpTimeoutDelta = jumpTimeout;
+    }
+
+    private void IncreaseSpeed(int gainedSpeedPer)
+    {
+        maxSpeed += maxSpeed * gainedSpeedPer / 100f;
     }
 
     private void GroundCheck_OnIsGroundedChangeAction(bool isGrounded)
@@ -60,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        float targetSpeed = playerMovementSO.maxSpeed;
+        float targetSpeed = maxSpeed;
 
         if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
@@ -77,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
             // creates curved result rather than a linear one giving a more organic speed change
             // note T in Lerp is clamped, so we don't need to clamp our speed
             _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                Time.deltaTime * playerMovementSO.speedChangeRate);
+                Time.deltaTime * speedChangeRate);
 
             // round speed to 3 decimal places
             _speed = Mathf.Round(_speed * 1000f) / 1000f;
@@ -86,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _speed = targetSpeed;
         }
-        _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * playerMovementSO.speedChangeRate);
+        _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * speedChangeRate);
         if (_animationBlend < 0.01f) _animationBlend = 0f;
 
         // normalise input direction
@@ -99,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                               Camera.main.transform.eulerAngles.y;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                playerMovementSO.smoothRotation);
+                smoothRotation);
 
             // rotate to face input direction relative to camera position
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
@@ -124,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
             if (_input.jump && _jumpTimeoutDelta <= 0.0f)
             {
                 Debug.Log("jump");
-                _rb.AddForce(Vector3.up * playerMovementSO.jumpForce, ForceMode.Impulse);
+                _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 OnJumpAction?.Invoke(true);
 
                 _input.jump = false;
@@ -139,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             // reset the jump timeout timer
-            _jumpTimeoutDelta = playerMovementSO.jumpTimeout;
+            _jumpTimeoutDelta = jumpTimeout;
 
             if (_rb.velocity.y <= 0f)
             {

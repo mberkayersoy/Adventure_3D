@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   smoothRotation: 0.1
-  jumpForce: 5
+  jumpForce: 50
   speedChangeRate: 10
   jumpTimeout: 0.5
