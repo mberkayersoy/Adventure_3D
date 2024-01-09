@@ -1,11 +1,6 @@
-using DG.Tweening;
-using GameSystemsCookbook;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+
 
 public class TypeADroneController : WeaponSkill
 {
@@ -19,10 +14,11 @@ public class TypeADroneController : WeaponSkill
     [SerializeField] private float _maxDistanceFromTarget = 3f;
 
     [Header("Attack")]
-    //[SerializeField] private MissiliesInteraction _missiliesPrefab;
-    //[SerializeField] private MissiliesInteraction[] _missiliesList;
-    [SerializeField] private int _missilesDamage = 100; // For each missile
+    [SerializeField] private MissileInteraction _missiliesPrefab;
+    [SerializeField] private MissileInteraction[] _missiliesList;
+    [SerializeField] private int _missileDamage = 100; // For each missile
     [SerializeField] private int _missiliesCount = 15;
+    [SerializeField] private LayerMask _missileInteractLayer;
 
     private Transform _target;
     private Vector3 refVelocity = Vector3.zero;
@@ -31,18 +27,19 @@ public class TypeADroneController : WeaponSkill
     {
         _target = transform;
         _droneModel.SetParent(null, false); // To avoid being affected by the parent's transform.
+        CreateMissiles();
         base.Start();
     }
     public override void DeActivate()
     {
         base.DeActivate();
+        DeActivateMissiles();
     }
     public override void Activate()
     {
         base.Activate();
-        FireMissiles();
+        StartCoroutine(ActivateMissiles());
     }
-
 
     private new void Update()
     {
@@ -88,19 +85,62 @@ public class TypeADroneController : WeaponSkill
 
     #region Attack
 
-    private void FireMissiles()
+    private IEnumerator ActivateMissiles()
     {
-
+        Vector3 targetPoint = FindFireDirection();
+        float deviationRadius = 0.5f;
+        foreach (MissileInteraction missile in _missiliesList)
+        {
+            missile.transform.position = _droneModel.position;
+            Vector3 deviation = new Vector3(Random.Range(-deviationRadius, deviationRadius), 0f, Random.Range(-deviationRadius, deviationRadius));
+            Vector3 targetWithDeviation = targetPoint + deviation;
+            yield return new WaitForSeconds(0.05f);
+            missile.gameObject.SetActive(true);
+            missile.StartMissileMovement(targetWithDeviation);
+        }
+    }
+    private void DeActivateMissiles()
+    {
+        foreach (MissileInteraction missile in _missiliesList)
+        {
+            missile.gameObject.SetActive(false);
+        }
     }
 
+    private Vector3 FindFireDirection()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(_droneModel.position, _droneModel.forward - Vector3.up, out hit, 100f, _missileInteractLayer))
+        {
+            return hit.point;
+        }
+        return Vector3.zero;
+    }
     private void CreateMissiles()
     {
-
+        _missiliesList = new MissileInteraction[_missiliesCount];
+        for (int i = 0; i < _missiliesCount; i++)
+        {
+            _missiliesList[i] = Instantiate(_missiliesPrefab);
+            _missiliesList[i].gameObject.SetActive(false);
+            _missiliesList[i].damage = _missileDamage;
+        }
     }
+
+
     #endregion
     public override void UpgradeSkill()
     {
-        throw new System.NotImplementedException();
+        _missileDamage += 100;
     }
 
+    private void OnDrawGizmos()
+    {
+        if (FindFireDirection() != Vector3.zero)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(FindFireDirection(), 0.25f);
+        }
+    }
 }

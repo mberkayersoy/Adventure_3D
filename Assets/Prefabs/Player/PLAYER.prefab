@@ -526,9 +526,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHealthSO: {fileID: 11400000, guid: 86aca035f9be3f4428e00446b61e0b76, type: 2}
-  _currentHealth: 5000
   _playerGainHealth: {fileID: 11400000, guid: b57b8afc434dd95459b08ae774cfbb62, type: 2}
   _playerDamaged: {fileID: 11400000, guid: d525fca37e01fb144b9bbf79ed5bfc99, type: 2}
+  _playerReceivedDamage: {fileID: 11400000, guid: f361531118f3815489c0a947a10800ca,
+    type: 2}
   _playerHealthChanged: {fileID: 11400000, guid: 2cf225072d63fed44ad65b4e601e6423,
     type: 2}
 --- !u!114 &6872903952323399835
@@ -582,6 +583,9 @@ MonoBehaviour:
   _skillUpgraded: {fileID: 11400000, guid: 45b3fa666aef8df4486914322fe4e2c3, type: 2}
   _currentActiveSkills: []
   _currentPassiveSkills: []
+  asad:
+    m_Keys: []
+    m_Values: 
   _currentSkills: []
 --- !u!1 &1238233073798660711
 GameObject:

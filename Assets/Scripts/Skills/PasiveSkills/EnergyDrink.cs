@@ -38,7 +38,6 @@ public class EnergyDrink : PassiveSkill, ITimer
 
     private void HealPlayer()
     {
-        Debug.Log("HealPlayer");
         _playerGainHealth.RaiseEvent(_healPercentage);
     }
 

@@ -7,14 +7,17 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private HealthSO _playerHealthSO;
-    [SerializeField] private int _currentHealth;
 
     [Header("Listen to Event Channels")]
     [SerializeField] private IntEventChannelSO _playerGainHealth;
     [SerializeField] private IntEventChannelSO _playerDamaged;
+    [SerializeField] private IntEventChannelSO _playerReceivedDamage;
 
     [Header("Broadcast on Event Channels")]
     [SerializeField] private IntEventChannelSO _playerHealthChanged;
+
+    private int _receivedDamagePer = 0;
+    private int _currentHealth;
     private void Awake()
     {
         _currentHealth = _playerHealthSO.maxHealth;
@@ -24,11 +27,19 @@ public class PlayerHealth : MonoBehaviour
     {
         _playerGainHealth.OnEventRaised += Heal;
         _playerDamaged.OnEventRaised += TakeDamage;
+        _playerReceivedDamage.OnEventRaised += SetDecreaseTakenDamage;
     }
+
+
     private void OnDisable()
     {
         _playerGainHealth.OnEventRaised -= Heal;
         _playerDamaged.OnEventRaised -= TakeDamage;
+        _playerReceivedDamage.OnEventRaised -= SetDecreaseTakenDamage;
+    }
+    private void SetDecreaseTakenDamage(int receivedDamagePer)
+    {
+        _receivedDamagePer = receivedDamagePer;
     }
 
     private void Heal(int healPercetange)
@@ -40,11 +51,17 @@ public class PlayerHealth : MonoBehaviour
 
     private void TakeDamage(int takenDamage)
     {
-        _currentHealth -= takenDamage;
+        _currentHealth -= CalculateTakenDamage(takenDamage);
         ClampHealth();
         _playerHealthChanged.OnEventRaised(_currentHealth);
     }
 
+    private int CalculateTakenDamage(int takenDamage)
+    {
+        Debug.Log("Before TakenDamage: " + takenDamage);
+        Debug.Log("After TakenDamage: " + (takenDamage - Mathf.RoundToInt(takenDamage * _receivedDamagePer / 100)));
+        return takenDamage - Mathf.RoundToInt(takenDamage * _receivedDamagePer / 100);
+    }
     private void ClampHealth()
     {
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _playerHealthSO.maxHealth);

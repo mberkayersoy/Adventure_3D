@@ -17,7 +17,7 @@ public abstract class ActiveSkill : Skill, ITimer
 
     protected virtual void Start()
     {
-        Activate();
+        DeActivate();
     }
 
     protected virtual void Update()

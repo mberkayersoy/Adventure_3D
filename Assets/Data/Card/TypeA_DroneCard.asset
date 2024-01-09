@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208d10bf5d2e141499c3101dfdee8688, type: 3}
   m_Name: TypeA_DroneCard
   m_EditorClassIdentifier: 
-  cardSkill: {fileID: 0}
+  cardSkill: {fileID: 4095835895207016448, guid: ed75ed7b52a563940aaaa0251bf6b410,
+    type: 3}
   cardName: Type-A Drone
   cardSprite: {fileID: 21300098, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
   cardBackground: {fileID: 21300000, guid: b7293498b37f79e428cdddbed14f7140, type: 3}

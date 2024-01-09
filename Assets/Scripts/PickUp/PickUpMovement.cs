@@ -5,6 +5,7 @@ using GameSystemsCookbook;
 public class PickUpMovement : MonoBehaviour, IMagnatable
 {
     [SerializeField] private Vector3EventChannelSO _magnetPickedUp;
+    
     private void OnEnable()
     {
         _magnetPickedUp.OnEventRaised += MoveToTarget;

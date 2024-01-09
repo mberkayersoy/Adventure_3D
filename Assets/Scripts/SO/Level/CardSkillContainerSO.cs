@@ -6,8 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkillContainerSO", menuName = "Level/Card Skill Container")]
 public class CardSkillContainerSO : LevelObjectsSO
 {
-    public List<CardDataSO> activeSkillList;
-    public List<CardDataSO> passiveSkillList;
+    public CardDataSO[] activeSkillList;
+    public CardDataSO[] passiveSkillList;
 
     public List<CardData> CopyActiveSkillList()
     {

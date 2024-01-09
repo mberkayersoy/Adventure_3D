@@ -153,6 +153,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5611205537735240909, guid: 25fb3170ee662214bbf8b4f2e6878d20,
         type: 3}
+      propertyPath: _material
+      value: 
+      objectReference: {fileID: 2100000, guid: 47b062f3ce01b0c428540cf7f870805c, type: 2}
+    - target: {fileID: 5611205537735240909, guid: 25fb3170ee662214bbf8b4f2e6878d20,
+        type: 3}
       propertyPath: _experienceAmount
       value: 50
       objectReference: {fileID: 0}

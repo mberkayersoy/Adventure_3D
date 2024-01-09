@@ -19,7 +19,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private EnemyContainerSO _enemyContainer;
     [SerializeField] private PickUpContainerSO _pickUpContainer;
 
-    [Header("Spawn Manager Settings")]
+    [Header("Spawn Settings")]
     [SerializeField] private float _outerSpawnRadius = 8f;
     [SerializeField] private float _innerSpawnRadius = 5f;
     [SerializeField] private float _spawnInterval = 0.1f;
@@ -47,7 +47,8 @@ public class SpawnManager : MonoBehaviour
     private void SpawnExperience(Vector3 deadEnemyPosition)
     {
         SelectRandomObject(_pickUpContainer.pickUpObjects);
-        LeanPool.Spawn(SelectRandomObject(_pickUpContainer.pickUpObjects), deadEnemyPosition + Vector3.up, Quaternion.identity);
+        LeanPool.Spawn(SelectRandomObject(_pickUpContainer.pickUpObjects), 
+                       deadEnemyPosition + Vector3.up, Quaternion.identity);
     }
 
     private void Update()

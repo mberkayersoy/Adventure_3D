@@ -666,7 +666,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 923d87370c0599f43965b0e16057ad50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 50
   easeMode: 27
-  duration: 1
   distanceMult: 5

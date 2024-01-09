@@ -1,7 +1,5 @@
 using DG.Tweening;
 using GameSystemsCookbook;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,10 +16,10 @@ public class CardManager : MonoBehaviour
 
     [SerializeField] private List<CardData> _activeSkills = new List<CardData>();
     [SerializeField] private List<CardData> _passiveSkills = new List<CardData>();
-    [SerializeField] private List<CardData> _unlockedActiveSkills = new List<CardData>();
-    [SerializeField] private List<CardData> _unlockedPassiveSkills = new List<CardData>();
+    [SerializeField] private List<CardData> _unlockedActiveSkills = new List<CardData>(_MAXSKILLCOUNT);
+    [SerializeField] private List<CardData> _unlockedPassiveSkills = new List<CardData>(_MAXSKILLCOUNT);
 
-    [Header("Listening events")]
+    [Header("Listening Events")]
     [SerializeField] private SkillEventChannelSO _skillAddedEventChannel;
     [SerializeField] private SkillEventChannelSO _skillUpgradedEventChannel;
     [SerializeField] private SkillEventChannelSO _skillChooseEventChannel;
@@ -180,7 +178,6 @@ public class CardManager : MonoBehaviour
     private List<T> GetRandomCards<T>(List<T> list1, List<T> list2, int cardCount)
     {
         List<T> mergedList = list1.Concat(list2).ToList();
-
         List<T> choosenCards = new List<T>();
 
         while (choosenCards.Count < cardCount)
