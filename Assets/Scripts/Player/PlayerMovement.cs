@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
         Vector3 moveVector = inputDirection * _speed;
-        _rb.velocity = new Vector3 (moveVector.x, _rb.velocity.y, moveVector.z);
+        _rb.velocity = new Vector3(moveVector.x, _rb.velocity.y, moveVector.z);
 
         OnSpeedChangeAction?.Invoke(_speed);
         OnAnimationBlendChangeAction?.Invoke(inputMagnitude);
